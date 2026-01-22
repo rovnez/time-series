@@ -1,0 +1,53 @@
+[project]
+name = "time-series"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "rovnez", email = "rovnez42@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "matplotlib>=3.10.8",
+    "numpy>=2.3.5",
+    "openpyxl>=3.1.5",
+    "pandas>=2.3.3",
+    "pandas-stubs~=2.3.3",
+    "polars>=1.37.1",
+    "requests>=2.32.5",
+    "statsmodels>=0.14.6",
+]
+
+[tool.uv.build-backend]
+module-name = "tseries"
+
+[project.scripts]
+tseries = "tseries:main"
+
+[build-system]
+requires = ["uv_build>=0.9.17,<0.10.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.5.1",
+    "ruff>=0.14.13",
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+extend-select = ["E501"]
