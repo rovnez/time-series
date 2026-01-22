@@ -32,22 +32,18 @@ build-backend = "uv_build"
 dev = [
     "pre-commit>=4.5.1",
     "ruff>=0.14.13",
+    "pytest>=9.0.2",
+    "jupyter"
 ]
-
-
-
-
-
-
-
-
-
-
-
-
+test = [
+    "pytest>=9.0.2",
+]
 
 [tool.ruff]
 line-length = 120
 
 [tool.ruff.lint]
 extend-select = ["E501"]
+
+[tool.uv]
+default-groups = []

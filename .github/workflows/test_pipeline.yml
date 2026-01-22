@@ -9,17 +9,29 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ "3.13" ]
 
     steps:
       - uses: actions/checkout@v5
-      - name: Set up Python
-        # This is the version of the action for setting up Python, not the Python version.
-        uses: actions/setup-python@v5
+
+      - name: "Install Python" # use GitHub action (faster due to caching)
+        uses: actions/setup-python@v6
         with:
-          # Semantic version range syntax or exact version of a Python version
-          python-version: '3.13'
-          # Optional - x64 or x86 architecture, defaults to x64
-          architecture: 'x64'
-      # You can test your matrix by printing the current Python version
+          python-version-file: ".python-version"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          version: "0.9.26" # specific uv version
+
+      - name: Install the project
+        run: uv sync --no-default-groups --locked --group test
+
+      - name: Run tests
+        # For example, using `pytest`
+        run: uv run pytest tests
+
       - name: Display Python version
-        run: python -c "import sys; print(f'LALALALLALA {sys.version}')"
+        run: uv pip list
